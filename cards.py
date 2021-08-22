@@ -4,12 +4,18 @@ global bitcoins
 global tomine
 bitcoins = 0
 class Cards:   # cards in the game
-  rustycard = 0.0001
+  rustyandbrokencard = 0.0001
+  broken8bitcard = 0.0003
+
+with shelve.open('allCards') as cd:
+  cd["card1"] = Cards.rustyandbrokencard
+  cd["card2"] = Cards.broken8bitcard
 
 with shelve.open('aCoins') as pc:
   pbitcoins = pc["Bitcoins"]
   pgcards = pc["gcards"]
-  e_pgcards = pc["egcards"] = Cards.rustycard
+  e_pgcards = pc["egcards"]
+
 
 def mine():
   global tomine
@@ -30,3 +36,4 @@ def mine():
       time.sleep(2)
       break
     time.sleep(2)
+
